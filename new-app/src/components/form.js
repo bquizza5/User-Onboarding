@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 
 const OnboardingForm = ({ errors, touched, values, status }) => {
-    const [ users, setUsers] = useState([])
+    const [ users, setUsers ] = useState([])
 
     useEffect(() => {
     
@@ -15,9 +15,10 @@ const OnboardingForm = ({ errors, touched, values, status }) => {
     }, [status]);
 
   return (
+      <>
     <div>
       <h1>Onboarding</h1>
-      <Form>
+      <Form className='form'>
         <Field type="text" name="name" placeholder="Name" />
         {touched.name && errors.name && (
           <p className="error">{errors.name}</p>
@@ -44,10 +45,23 @@ const OnboardingForm = ({ errors, touched, values, status }) => {
 
         <button type="submit">Submit!</button>
       </Form>
-      {users.map(user => {
-          return <p>{user.name}<p>;
-      })}
+      
     </div>
+    <div className='users'>
+        {
+            users.map((user)=> {
+            return(
+                <div className='user-card'>
+                    <img src={`https://picsum.photos/id/${user.id}/100/100`} />
+                    <div>
+                    <p key={user.id}>{user.name}</p>
+                    <p >{user.email}</p>
+                    </div>
+                </div>
+            )})   
+        }
+    </div>
+    </>
   );
 };
 
@@ -72,7 +86,10 @@ const FormikOnboardingForm = withFormik({
   handleSubmit(values, {setStatus}) {
     axios
       .post('https://reqres.in/api/users/', values)
-      .then(res => {setStatus(res.data);})
+      .then(res => {
+          setStatus(res.data);
+          console.log(res.data)
+          })
       .catch(err => console.log(err.response));
   }
 })(OnboardingForm);
