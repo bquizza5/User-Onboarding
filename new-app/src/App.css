@@ -1,0 +1,39 @@
+.App {
+  width: 300px;
+  margin: auto
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 5px;
+  margin: 15px 0;
+}
+
+.error {
+  margin: 0;
+  /* position: absolute; */
+  color: red;
+  display: block;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.user-card img {
+  margin: 15px;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.user-card div {
+  align-self: center;
+}
